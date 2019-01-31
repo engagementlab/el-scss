@@ -1,0 +1,136 @@
+/**
+ * Engagement Lab SCSS Mixin Library
+ * 
+ * created by Johnny Richardson
+ * 2017-19
+ * ==========
+ */
+
+// TRANSFORM HELPERS
+// Helpers for making transforms
+
+/**
+* Breaks down in-line transition for multiple properties into unfolded format.
+* @link: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
+* @usage: unfold-transition(all 1s ease-in-out)
+*/
+@function unfold-transition($transition) {
+     
+    // Default values
+    $property: all;
+    $duration: .2s;
+    $easing: null; // Browser default is ease, which is what we want
+    $delay: null; // Browser default is 0, which is what we want
+    $defaultProperties: ($property, $duration, $easing, $delay);
+
+    // Grab transition properties if they exist
+    $unfoldedTransition: ();
+
+    @for $i from 1 through length($defaultProperties) {
+        $p: null;
+
+        @if $i <=length($transition) {
+            $p: nth($transition, $i)
+        }
+
+        @else {
+            $p: nth($defaultProperties, $i)
+        }
+
+        $unfoldedTransition: append($unfoldedTransition, $p);
+    }
+
+    @return $unfoldedTransition;
+    
+}
+
+/// Create universal transform properties on element from given transform input.
+/// @example scss
+///     @include(transform(scale(.5)))
+///
+/// @param {custom-ident} $transforms - the tranform(s) function
+/// @param {boolean} $force [false] - decorate with !important flag (use sparingly, as it breaks natural cascade!)
+@mixin transform($transforms, $force: false) {
+
+    // If force, transform property declaration overrides any other declarations.
+    @if $force {
+        -moz-transform: $transforms !important;
+        -o-transform: $transforms !important;
+        -ms-transform: $transforms !important;
+        -webkit-transform: $transforms !important;
+        transform: $transforms !important;
+    }
+
+    @else {
+        -moz-transform: $transforms;
+        -o-transform: $transforms;
+        -ms-transform: $transforms;
+        -webkit-transform: $transforms;
+        transform: $transforms;
+    }
+
+}
+
+/**
+* Rotate element included on by given degrees.
+* @usage: transform(rotate(180))
+*/
+@mixin rotate($deg) {
+    @include transform(rotate(#{$deg}deg));
+}
+
+/**
+* Scale element included on by given factor.
+* @usage: transform(scale(.5))
+*/
+@mixin scale($scale) {
+    @include transform(scale($scale));
+}
+
+/**
+* Move/translate element included on by given x and optional y length or percent.
+* @usage: transform(translate(5px, 10%))
+*/
+@mixin translate ($x, $y:0) {
+    @include transform(translate($x, $y));
+}
+
+/**
+* Skew element included on by given x and y degrees.
+* @usage: transform(skew(5, 10)
+*/
+@mixin skew ($x, $y) {
+    @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+// Transitions
+
+/**
+* Apply transition for element given one property, duration, optional easing method
+* @usage: transition(width, 5s, ease-in-out)
+*/
+@mixin transition($transition-property, $transition-time, $ease-method: ease) {
+    -webkit-transition: $transition-property $transition-time $ease-method;
+    -moz-transition: $transition-property $transition-time $ease-method;
+    -ms-transition: $transition-property $transition-time $ease-method;
+    -o-transition: $transition-property $transition-time $ease-method;
+    transition: $transition-property $transition-time $ease-method;
+}
+
+/**
+* Apply any number of transitions for element.
+* @usage: multi-transition(width, height 0.3s ease-in-out)
+*/
+@mixin multi-transition($transitions...) {
+    $unfoldedTransitions: ();
+
+    @each $transition in $transitions {
+        $unfoldedTransitions: append($unfoldedTransitions, unfold-transition($transition), comma);
+    }
+
+    -webkit-transition: $unfoldedTransitions;
+    -moz-transition: $unfoldedTransitions;
+    -ms-transition: $unfoldedTransitions;
+    -o-transition: $unfoldedTransitions;
+    transition: $unfoldedTransitions;
+}

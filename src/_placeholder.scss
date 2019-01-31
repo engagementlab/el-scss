@@ -1,0 +1,47 @@
+/**
+ * Engagement Lab SCSS Mixin Library
+ * 
+ * created by Johnny Richardson
+ * 2017-19
+ * ==========
+ */
+
+
+/**
+* Apply content as text input placeholder.
+* @usage: placeholder {
+            
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: .4em;
+            font-weight: 300;
+            font-stretch: condensed;
+            
+        }
+*/
+ @mixin placeholder {
+
+    &::-webkit-input-placeholder {
+        @content
+    }
+
+    &:-moz-placeholder {
+        @content
+    }
+
+    &::-moz-placeholder {
+        @content
+    }
+
+    &:-ms-input-placeholder {
+        @content
+    }
+
+    &::-ms-input-placeholder {
+        @content 
+    }
+    
+    &::placeholder {
+        @content
+    
+    }
+}

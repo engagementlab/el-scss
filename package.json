@@ -1,0 +1,32 @@
+{
+  "name": "@engagementlab/el-scss",
+  "version": "0.0.2",
+  "description": "The Engagement Lab's core SCSS mixin library.",
+  "main": "bundle.scss",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/engagementlab/el-scss.git"
+  },
+  "keywords": [
+    "scss",
+    "sass",
+    "mixins",
+    "engagment",
+    "lab"
+  ],
+  "author": "Johnny Richardson <johnny.c.rich@gmail.com> (https://github.com/johnnycrich)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/engagementlab/el-scss/issues"
+  },
+  "homepage": "https://github.com/engagementlab/el-scss#readme",
+  "dependencies": {
+    "sass-mq": "^5.0.0"
+  }
+}

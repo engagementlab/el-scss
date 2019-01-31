@@ -1,0 +1,58 @@
+/**
+ * Engagement Lab SCSS Mixin Library
+ * 
+ * created by Johnny Richardson
+ * 2017-19
+ * ==========
+ */
+
+// BREAKPOINT HELPERS via sass-mq library
+// https://sass-mq.github.io/sass-mq/
+
+// Mobile/phones
+
+@mixin mobile-only {
+    @include mq($until: tabletPortrait) {
+        @content;
+    }
+}
+
+@mixin phones {
+    @include mq($until: tabletPortrait) {
+        @content;
+    }
+}
+
+@mixin not-phones {
+    @include mq($from: tabletPortrait) {
+        @content;
+    }
+}
+
+// Tablet
+
+@mixin tablet-portrait {
+    @include mq($from: mobileLg, $until: tablet) {
+        @content;
+    }
+}
+
+@mixin until-tablet-wide {
+    @include mq($until: tablet) {
+        @content;
+    }
+}
+
+// Desktop/not-desktop
+
+@mixin desktop {
+    @include mq($from: wide) {
+        @content;
+    }
+}
+
+@mixin not-desktop {
+    @include mq($until: wide) {
+        @content;
+    }
+}

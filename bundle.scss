@@ -1,0 +1,103 @@
+/**
+ * Engagement Lab SCSS Mixin Library
+ * 
+ * created by Johnny Richardson
+ * 2017-19
+ * ==========
+ */
+
+//  You must specify these vars before importing this package:
+$cloudinary-account: 'cloudinary' !default;
+$cdn-product: 'homepage' !default;
+
+@import 'src/_animation';
+@import 'src/_breakpoint';
+@import 'src/_placeholder';
+@import 'src/_pxem';
+@import 'src/_transforms';
+
+@import '~/sass-mq/mq';
+
+/// Apply any type of filter to element.
+/// @example scss
+///     @include(filter(grayscale, 100%)), etc:
+///         sepia    -> sepia(100%);
+///         saturate -> saturate(0%);
+///     hue-rotate     -> filter: hue-rotate(45deg);
+///     invert         -> filter: invert(100%);
+///     brightness     -> filter: brightness(15%);
+///     contrast       -> filter: contrast(200%);
+///     blur           -> filter: blur(2px);
+///
+/// @param {string} $type - type of filter
+/// @param {percentage|decimal} $amount - fiilter amount
+@mixin filter($type, $amount) {
+    -webkit-filter: $type+unquote('(#{$amount})');
+    -moz-filter: $type+unquote('(#{$amount})');
+    -ms-filter: $type+unquote('(#{$amount})');
+    -o-filter: $type+unquote('(#{$amount})');
+    filter: $type+unquote('(#{$amount})');
+}
+
+/// Apply box shadow to element.
+/// @example scss
+///     @include(box-shadow(2px, 2px, 2px, 1px, rgba(0, 0, 0, 0.2))
+///
+/// @param {length} $top - shadow offset y
+/// @param {length} $left - shadow offset x
+/// @param {length} $blur - blur size
+/// @param {color} $color - shadow color
+/// @param {boolean} $inset [false] - if true, shadow is inside element frame
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+    @if $inset {
+        -webkit-box-shadow: inset $top $left $blur $color;
+        -moz-box-shadow: inset $top $left $blur $color;
+        box-shadow: inset $top $left $blur $color;
+    }
+
+    @else {
+        -webkit-box-shadow: $top $left $blur $color;
+        -moz-box-shadow: $top $left $blur $color;
+        box-shadow: $top $left $blur $color;
+    }
+}
+
+/**
+* Apply border radius to element.
+* @usage: border-radius(20)
+*/
+@mixin border-radius($radius) {
+
+    -webkit-border-radius: #{$radius + "px"};
+    -moz-border-radius: #{$radius + "px"};
+    border-radius: #{$radius + "px"};
+
+}
+
+/**
+* Apply border radius to element.
+* @usage: border-radius(20)
+*/
+@mixin circular-background($color) {
+
+    background: -moz-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
+    background: -webkit-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
+    background: radial-gradient(ellipse at center, $color 1%, $color 70%, white 1%);
+}
+
+/**
+* Create inline URL to Cloudinary-hosted image with any specified transforms.
+* @usage: cdn-image('bg/home-bg', f_auto, c_scale, w_1280);
+*/
+@function cdn-image($imgName, $options...) {
+
+    $imgParams: ();
+    $version: random(500000) + 10000000;
+    $strPrefix: "https://res.cloudinary.com/#{$cloudinary-account}/image/upload/";
+
+    @each $value in $options {
+        $strPrefix: $strPrefix + ","+ $value;
+    }
+
+    @return url("#{$strPrefix}/v#{$version}/#{$cdn-product}/#{$imgName}");
+}

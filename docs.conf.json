@@ -1,0 +1,6 @@
+{
+    "dest": "./docs",
+    "exclude": [
+        "node_modules/sass-mq/*"
+    ]
+}

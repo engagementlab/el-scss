@@ -1,0 +1,65 @@
+/**
+ * Engagement Lab SCSS Mixin Library
+ * 
+ * created by Johnny Richardson
+ * 2017-19
+ * ==========
+ */
+
+// ANIMATIONS HELPERS
+
+/**
+* Apply animations to elements using specified animation/keyframe name, duration, delay, etc.
+* https://gist.github.com/krambuhl/8573100
+* @usage: animation(3s infinite alternate slidein);
+*/
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+
+    -webkit-animation: $animations;
+    -moz-animation: $animations;
+    -o-animation: $animations;
+    animation: $animations;
+}
+
+
+/**
+* Create keyframes at-rule with specified name and provided content.
+* @usage: keyframes(slidein) {
+            from {
+                margin-left: 100%;
+                width: 300%;
+            }
+
+            to {
+                margin-left: 0%;
+                width: 100%;
+            }
+          }
+*/
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
