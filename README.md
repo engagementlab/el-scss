@@ -1,10 +1,10 @@
 
 # The [Engagement Lab](https://elab.emerson.edu)'s core SCSS mixin library
 
-##Install
+## Install
 ```npm i --save el-scss```
 
-##Usage
+## Usage
 In your SCSS:
 ```@import '~/el-scss/bundle';```
 

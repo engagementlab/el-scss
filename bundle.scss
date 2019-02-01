@@ -62,22 +62,23 @@ $cdn-product: 'homepage' !default;
     }
 }
 
-/**
-* Apply border radius to element.
-* @usage: border-radius(20)
-*/
-@mixin border-radius($radius) {
+/// Apply border radius to element.
+/// @example scss
+///     @include(border-radius(20))
+///
+/// @param {length} $top-left-radius - either the radius of the border for all corners, or the top-left corner value if others specified
+/// @param {length} $top-right [null] - top-right corner value
+/// @param {length} $bottom-right [null] - bottom-right corner value
+/// @param {length} $bottom-left [null] - bottom-left corner value
+@mixin border-radius($top-left-radius, $top-right: null, $bottom-right: null, $bottom-left: null) {
 
-    -webkit-border-radius: #{$radius + "px"};
-    -moz-border-radius: #{$radius + "px"};
-    border-radius: #{$radius + "px"};
+    -webkit-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+    -moz-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+    -ms-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+    border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
 
 }
 
-/**
-* Apply border radius to element.
-* @usage: border-radius(20)
-*/
 @mixin circular-background($color) {
 
     background: -moz-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
@@ -85,10 +86,10 @@ $cdn-product: 'homepage' !default;
     background: radial-gradient(ellipse at center, $color 1%, $color 70%, white 1%);
 }
 
-/**
-* Create inline URL to Cloudinary-hosted image with any specified transforms.
-* @usage: cdn-image('bg/home-bg', f_auto, c_scale, w_1280);
-*/
+/// Create inline URL to Cloudinary-hosted image with any specified transforms.
+/// @example scss
+///     background-image: cdn-image('bg/home-bg', f_auto, c_scale, w_1280)
+///
 @function cdn-image($imgName, $options...) {
 
     $imgParams: ();
