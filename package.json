@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/engagementlab/el-scss/issues"
   },
-  "homepage": "https://github.com/engagementlab/el-scss#readme",
+  "homepage": "https://engagementlab.github.io/el-scss/",
   "dependencies": {
     "sass-mq": "^5.0.0"
   }
