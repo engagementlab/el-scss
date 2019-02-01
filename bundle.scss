@@ -16,7 +16,8 @@ $cdn-product: 'homepage' !default;
 @import 'src/_pxem';
 @import 'src/_transforms';
 
-@import '~/sass-mq/mq';
+// This will be in node_modules root
+@import '../../sass-mq/mq';
 
 /// Apply any type of filter to element.
 /// @example scss
