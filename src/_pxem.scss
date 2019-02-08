@@ -14,7 +14,7 @@
 * @link: http://stackoverflow.com/a/12335841/1779999
 * @usage: parse-int(10px) => 10
 */
-$base-font-size: 16px;
+$base-font-size: 16px !default;
 @function parse-int($number) {
     @return $number / ($number * 0 + 1);
 }

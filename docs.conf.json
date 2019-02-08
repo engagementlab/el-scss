@@ -2,5 +2,9 @@
     "dest": "./docs",
     "exclude": [
         "node_modules/sass-mq/*"
-    ]
+    ],
+    "groups": {
+        "helpers": "Helper Mixins",
+        "general": "General Mixins"
+    }
 }
