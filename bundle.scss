@@ -19,6 +19,21 @@ $cdn-product: 'homepage' !default;
 // This will be in node_modules root
 @import '../../sass-mq/mq';
 
+
+/// Apply style content to angular shadow-pierced image
+/// @example scss
+///     @include ngImg {
+///         margin-top: 1%;
+///     }
+///
+/// @link https://angular.io/guide/component-styles
+/// @group general
+@mixin ngImg {
+    ::ng-deep img {
+        @content;
+    }
+}
+
 /// Apply any type of filter to element.
 /// @example scss
 ///     @include(filter(grayscale, 100%)), etc:
