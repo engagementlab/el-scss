@@ -9,11 +9,12 @@
 // TRANSFORM HELPERS
 // Helpers for making transforms
 
-/**
-* Breaks down in-line transition for multiple properties into unfolded format.
-* @link: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
-* @usage: unfold-transition(all 1s ease-in-out)
-*/
+/// Breaks down in-line transition for multiple properties into unfolded format.
+/// @example scss
+///     @include(transform(scale(.5)))
+///
+/// @param {custom-ident} $transforms - the tranform(s) function
+/// @link: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
 @function unfold-transition($transition) {
      
     // Default values
@@ -79,10 +80,11 @@
     @include transform(rotate(#{$deg}deg));
 }
 
-/**
-* Scale element included on by given factor.
-* @usage: transform(scale(.5))
-*/
+/// Scale element included on by given factor.
+/// @example scss
+///     @include scale(.5)
+///
+/// @param {decimal} $scale - the amount to scale
 @mixin scale($scale) {
     @include transform(scale($scale));
 }
