@@ -2,52 +2,16 @@
  * Engagement Lab SCSS Mixin Library
  * 
  * created by Johnny Richardson
- * 2017-19
+ * 2017-2020
  * ==========
  */
 
 // TRANSFORM HELPERS
 // Helpers for making transforms
 
-/// Breaks down in-line transition for multiple properties into unfolded format.
-/// @example scss
-///     @include(transform(scale(.5)))
-///
-/// @param {custom-ident} $transforms - the tranform(s) function
-/// @link: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
-@function unfold-transition($transition) {
-     
-    // Default values
-    $property: all;
-    $duration: .2s;
-    $easing: null; // Browser default is ease, which is what we want
-    $delay: null; // Browser default is 0, which is what we want
-    $defaultProperties: ($property, $duration, $easing, $delay);
-
-    // Grab transition properties if they exist
-    $unfoldedTransition: ();
-
-    @for $i from 1 through length($defaultProperties) {
-        $p: null;
-
-        @if $i <=length($transition) {
-            $p: nth($transition, $i)
-        }
-
-        @else {
-            $p: nth($defaultProperties, $i)
-        }
-
-        $unfoldedTransition: append($unfoldedTransition, $p);
-    }
-
-    @return $unfoldedTransition;
-    
-}
-
 /// Create universal transform properties on element from given transform input.
 /// @example scss
-///     @include(transform(scale(.5)))
+///     @include transform(scale(.5))
 ///
 /// @param {custom-ident} $transforms - the tranform(s) function
 /// @param {boolean} $force [false] - decorate with !important flag (use sparingly, as it breaks natural cascade!)
@@ -69,13 +33,13 @@
         -webkit-transform: $transforms;
         transform: $transforms;
     }
-
 }
 
-/**
-* Rotate element included on by given degrees.
-* @usage: transform(rotate(180))
-*/
+/// Rotate element included on by given degrees.
+/// @example scss
+///     @include transform(rotate(180))
+///
+/// @param {decimal} $deg - degrees to rotate
 @mixin rotate($deg) {
     @include transform(rotate(#{$deg}deg));
 }
@@ -89,28 +53,89 @@
     @include transform(scale($scale));
 }
 
-/**
-* Move/translate element included on by given x and optional y length or percent.
-* @usage: transform(translate(5px, 10%))
-*/
-@mixin translate ($x, $y:0) {
+/// Scale element included on by given factor on X axis.
+/// @example scss
+///     @include scaleX(.5)
+///
+/// @param {decimal} $scale - the amount to scale
+@mixin scaleX($scale) {
+    @include transform(scaleX($scale));
+}
+
+/// Scale element included on by given factor on Y axis.
+/// @example scss
+///     @include scaleY(.5)
+///
+/// @param {decimal} $scale - the amount to scale
+@mixin scaleY($scale) {
+    @include transform(scaleY($scale));
+}
+
+/// Move/translate element included on by given x and optional y length or percent.
+/// @example scss
+///     @include translate(15%)
+///
+/// @param {length} $x - amount to translate on x-axis
+/// @param {length} $y [0] - amount to translate on y-axis
+@mixin translate($x, $y: 0) {
     @include transform(translate($x, $y));
 }
 
-/**
-* Skew element included on by given x and y degrees.
-* @usage: transform(skew(5, 10)
-*/
-@mixin skew ($x, $y) {
+/// Skew element included on by given x and y degrees.
+/// @example scss
+///     @include skew(5, 10)
+///
+/// @param {number} $x - amount to skew on x
+/// @param {number} $y - amount to skew on y
+@mixin skew($x, $y) {
     @include transform(skew(#{$x}deg, #{$y}deg));
 }
 
-// Transitions
+/*
+ Transitions
+ */
 
-/**
-* Apply transition for element given one property, duration, optional easing method
-* @usage: transition(width, 5s, ease-in-out)
-*/
+/// Breaks down in-line transition for multiple properties into unfolded format.
+/// @example scss
+///     @include(transform(scale(.5)))
+///
+/// @param {custom-ident} $transforms - the tranform(s) function
+/// @see: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
+@function unfold-transition($transition) {
+    // Default values
+    $property: all;
+    $duration: 0.2s;
+    $easing: null; // Browser default is ease, which is what we want
+    $delay: null; // Browser default is 0, which is what we want
+    $defaultProperties: ($property, $duration, $easing, $delay);
+
+    // Grab transition properties if they exist
+    $unfoldedTransition: ();
+
+    @for $i from 1 through length($defaultProperties) {
+        $p: null;
+
+        @if $i <=length($transition) {
+            $p: nth($transition, $i);
+        }
+
+        @else {
+            $p: nth($defaultProperties, $i);
+        }
+
+        $unfoldedTransition: append($unfoldedTransition, $p);
+    }
+
+    @return $unfoldedTransition;
+}
+
+/// Apply transition for element given one property, duration, optional easing method
+/// @example scss
+///     @include transition(width, 5s, ease-in-out)
+///
+/// @param {string} $transition-property - property to transition on
+/// @param {number} $transition-time - duration of transition
+/// @param {string|function} $ease-method [ease] - optional ease type/function
 @mixin transition($transition-property, $transition-time, $ease-method: ease) {
     -webkit-transition: $transition-property $transition-time $ease-method;
     -moz-transition: $transition-property $transition-time $ease-method;
@@ -119,15 +144,18 @@
     transition: $transition-property $transition-time $ease-method;
 }
 
-/**
-* Apply any number of transitions for element.
-* @usage: multi-transition(width, height 0.3s ease-in-out)
-*/
+/// Apply multiple transitions for element given properties, durations, easing
+/// @example scss
+///     @include multi-transition(width 2s, height 0.3s ease-in-out)
+///
+/// @param {string} $transitions - comma-seperated list of transitions
 @mixin multi-transition($transitions...) {
     $unfoldedTransitions: ();
 
     @each $transition in $transitions {
-        $unfoldedTransitions: append($unfoldedTransitions, unfold-transition($transition), comma);
+        $unfoldedTransitions: append($unfoldedTransitions,
+                unfold-transition($transition),
+                comma);
     }
 
     -webkit-transition: $unfoldedTransitions;
