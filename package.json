@@ -1,6 +1,6 @@
 {
   "name": "@engagementlab/el-scss",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "The Engagement Lab's core SCSS mixin library.",
   "main": "bundle.scss",
   "directories": {
@@ -30,6 +30,6 @@
     "sass-mq": "^5.0.0"
   },
   "devDependencies": {
-    "sassdoc": "^2.5.1"
+    "sassdoc": "^2.7.2"
   }
 }
