@@ -16,23 +16,20 @@
 /// @param {custom-ident} $transforms - the tranform(s) function
 /// @param {boolean} $force [false] - decorate with !important flag (use sparingly, as it breaks natural cascade!)
 @mixin transform($transforms, $force: false) {
-
-    // If force, transform property declaration overrides any other declarations.
-    @if $force {
-        -moz-transform: $transforms !important;
-        -o-transform: $transforms !important;
-        -ms-transform: $transforms !important;
-        -webkit-transform: $transforms !important;
-        transform: $transforms !important;
-    }
-
-    @else {
-        -moz-transform: $transforms;
-        -o-transform: $transforms;
-        -ms-transform: $transforms;
-        -webkit-transform: $transforms;
-        transform: $transforms;
-    }
+  // If force, transform property declaration overrides any other declarations.
+  @if $force {
+    -moz-transform: $transforms !important;
+    -o-transform: $transforms !important;
+    -ms-transform: $transforms !important;
+    -webkit-transform: $transforms !important;
+    transform: $transforms !important;
+  } @else {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+  }
 }
 
 /// Rotate element included on by given degrees.
@@ -41,7 +38,7 @@
 ///
 /// @param {decimal} $deg - degrees to rotate
 @mixin rotate($deg) {
-    @include transform(rotate(#{$deg}deg));
+  @include transform(rotate(#{$deg}deg));
 }
 
 /// Scale element included on by given factor.
@@ -50,7 +47,7 @@
 ///
 /// @param {decimal} $scale - the amount to scale
 @mixin scale($scale) {
-    @include transform(scale($scale));
+  @include transform(scale($scale));
 }
 
 /// Scale element included on by given factor on X axis.
@@ -59,7 +56,7 @@
 ///
 /// @param {decimal} $scale - the amount to scale
 @mixin scaleX($scale) {
-    @include transform(scaleX($scale));
+  @include transform(scaleX($scale));
 }
 
 /// Scale element included on by given factor on Y axis.
@@ -68,7 +65,7 @@
 ///
 /// @param {decimal} $scale - the amount to scale
 @mixin scaleY($scale) {
-    @include transform(scaleY($scale));
+  @include transform(scaleY($scale));
 }
 
 /// Move/translate element included on by given x and optional y length or percent.
@@ -78,7 +75,7 @@
 /// @param {length} $x - amount to translate on x-axis
 /// @param {length} $y [0] - amount to translate on y-axis
 @mixin translate($x, $y: 0) {
-    @include transform(translate($x, $y));
+  @include transform(translate($x, $y));
 }
 
 /// Skew element included on by given x and y degrees.
@@ -88,7 +85,7 @@
 /// @param {number} $x - amount to skew on x
 /// @param {number} $y - amount to skew on y
 @mixin skew($x, $y) {
-    @include transform(skew(#{$x}deg, #{$y}deg));
+  @include transform(skew(#{$x}deg, #{$y}deg));
 }
 
 /*
@@ -100,33 +97,31 @@
 ///     @include(transform(scale(.5)))
 ///
 /// @param {custom-ident} $transforms - the tranform(s) function
-/// @see: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
+/// @link: https://gist.github.com/tobiasahlin/7a421fb9306a4f518aab
 @function unfold-transition($transition) {
-    // Default values
-    $property: all;
-    $duration: 0.2s;
-    $easing: null; // Browser default is ease, which is what we want
-    $delay: null; // Browser default is 0, which is what we want
-    $defaultProperties: ($property, $duration, $easing, $delay);
+  // Default values
+  $property: all;
+  $duration: 0.2s;
+  $easing: null; // Browser default is ease, which is what we want
+  $delay: null; // Browser default is 0, which is what we want
+  $defaultProperties: ($property, $duration, $easing, $delay);
 
-    // Grab transition properties if they exist
-    $unfoldedTransition: ();
+  // Grab transition properties if they exist
+  $unfoldedTransition: ();
 
-    @for $i from 1 through length($defaultProperties) {
-        $p: null;
+  @for $i from 1 through length($defaultProperties) {
+    $p: null;
 
-        @if $i <=length($transition) {
-            $p: nth($transition, $i);
-        }
-
-        @else {
-            $p: nth($defaultProperties, $i);
-        }
-
-        $unfoldedTransition: append($unfoldedTransition, $p);
+    @if $i <=length($transition) {
+      $p: nth($transition, $i);
+    } @else {
+      $p: nth($defaultProperties, $i);
     }
 
-    @return $unfoldedTransition;
+    $unfoldedTransition: append($unfoldedTransition, $p);
+  }
+
+  @return $unfoldedTransition;
 }
 
 /// Apply transition for element given one property, duration, optional easing method
@@ -135,13 +130,13 @@
 ///
 /// @param {string} $transition-property - property to transition on
 /// @param {number} $transition-time - duration of transition
-/// @param {string|function} $ease-method [ease] - optional ease type/function
+/// @param {string} $ease-method [ease] - optional ease type/function
 @mixin transition($transition-property, $transition-time, $ease-method: ease) {
-    -webkit-transition: $transition-property $transition-time $ease-method;
-    -moz-transition: $transition-property $transition-time $ease-method;
-    -ms-transition: $transition-property $transition-time $ease-method;
-    -o-transition: $transition-property $transition-time $ease-method;
-    transition: $transition-property $transition-time $ease-method;
+  -webkit-transition: $transition-property $transition-time $ease-method;
+  -moz-transition: $transition-property $transition-time $ease-method;
+  -ms-transition: $transition-property $transition-time $ease-method;
+  -o-transition: $transition-property $transition-time $ease-method;
+  transition: $transition-property $transition-time $ease-method;
 }
 
 /// Apply multiple transitions for element given properties, durations, easing
@@ -150,17 +145,19 @@
 ///
 /// @param {string} $transitions - comma-seperated list of transitions
 @mixin multi-transition($transitions...) {
-    $unfoldedTransitions: ();
+  $unfoldedTransitions: ();
 
-    @each $transition in $transitions {
-        $unfoldedTransitions: append($unfoldedTransitions,
-                unfold-transition($transition),
-                comma);
-    }
+  @each $transition in $transitions {
+    $unfoldedTransitions: append(
+      $unfoldedTransitions,
+      unfold-transition($transition),
+      comma
+    );
+  }
 
-    -webkit-transition: $unfoldedTransitions;
-    -moz-transition: $unfoldedTransitions;
-    -ms-transition: $unfoldedTransitions;
-    -o-transition: $unfoldedTransitions;
-    transition: $unfoldedTransitions;
+  -webkit-transition: $unfoldedTransitions;
+  -moz-transition: $unfoldedTransitions;
+  -ms-transition: $unfoldedTransitions;
+  -o-transition: $unfoldedTransitions;
+  transition: $unfoldedTransitions;
 }
