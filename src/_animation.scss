@@ -6,7 +6,7 @@
  * ==========
  */
 
-// ANIMATIONS HELPERS
+// ANIMATION HELPERS
 
 /// Apply animations to element included on using specified animation/keyframe name, duration, delay, etc.
 /// @example scss
@@ -14,6 +14,7 @@
 ///
 /// @param {string} $animate - comma-seperated list of animations
 /// @link https://gist.github.com/krambuhl/8573100
+/// @group animation
 @mixin animation($animate...) {
   $max: length($animate);
   $animations: "";
@@ -32,9 +33,6 @@
   animation: $animations;
 }
 
-/**
-* @usage: 
-*/
 /// Create keyframes at-rule with specified name and provided content.
 /// @example scss
 ///     @include keyframes(slidein) {
@@ -48,8 +46,9 @@
 ///                width: 100%;
 ///            }
 ///       }
-/// @param animationName - name of animation
+/// @param {string} animationName - name of animation
 /// @content - animation style/keyframes
+/// @group animation
 @mixin keyframes($animationName) {
   @-webkit-keyframes #{$animationName} {
     @content;

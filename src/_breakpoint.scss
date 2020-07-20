@@ -11,18 +11,34 @@
 
 // Mobile/phones
 
+/// Apply styles for element included on for mobile phones only.
+/// @example scss
+///     @include mobile-only {
+///         font-family: 'Mobile-Font';
+///     }
+///
+/// @group browser
 @mixin mobile-only {
     @include mq($until: tabletPortrait) {
         @content;
     }
 }
 
+/// @alias mobile-only
+/// @group browser
 @mixin phones {
     @include mq($until: tabletPortrait) {
         @content;
     }
 }
 
+/// Apply styles for element included on for all devices but phones.
+/// @example scss
+///     @include not-phones {
+///         font-family: 'Not-Phones-Font';
+///     }
+///
+/// @group browser
 @mixin not-phones {
     @include mq($from: tabletPortrait) {
         @content;
@@ -31,12 +47,26 @@
 
 // Tablet
 
+/// Apply styles for element included on for tablets in portrait rotation.
+/// @example scss
+///     @include tablet-portrait {
+///         font-family: 'Tab-Font';
+///     }
+///
+/// @group browser
 @mixin tablet-portrait {
     @include mq($from: mobileLg, $until: tablet) {
         @content;
     }
 }
 
+/// Apply styles for element included on for all devices small or equal to tablet landscape.
+/// @example scss
+///     @include until-tablet-wide {
+///         font-family: 'Not-Desktop-Font';
+///     }
+///
+/// @group browser
 @mixin until-tablet-wide {
     @include mq($until: tablet) {
         @content;
@@ -45,12 +75,26 @@
 
 // Desktop/not-desktop
 
+/// Apply styles for element included on for desktop.
+/// @example scss
+///     @include desktop {
+///         font-family: 'Desktop-Font';
+///     }
+///
+/// @group browser
 @mixin desktop {
     @include mq($from: wide) {
         @content;
     }
 }
 
+/// Apply styles for element included on for all devices desktop.
+/// @example scss
+///     @include not-desktop {
+///         font-family: 'Not-Desktop-Font';
+///     }
+///
+/// @group browser
 @mixin not-desktop {
     @include mq($until: wide) {
         @content;
