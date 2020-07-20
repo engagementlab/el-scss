@@ -1,0 +1,107 @@
+/**
+ * Engagement Lab SCSS Mixin Library
+ * 
+ * created by Johnny Richardson
+ * 2017-2020
+ * ==========
+ */
+
+// FONT CLASSES
+
+// Make font-size "small"
+/// @example html
+///  <div class="small">I am small text.</div>
+///
+/// @group browser
+.small {
+    font-size: small;
+}
+
+// Make font-size "large"
+/// @example html
+///  <div class="large">I am large text.</div>
+///
+/// @group browser
+.large {
+    font-size: large;
+}
+
+// Make font-size "xx-large"
+/// @example html
+///  <div class="xx-large">I am huge text.</div>
+///
+/// @group browser
+.xx-large {
+    font-size: xx-large;
+}
+
+// Make text transformed as uppercase
+/// @example html
+///  <div class="uppercase">I WILL LOOK LIKE THIS.</div>
+///
+/// @group browser
+.uppercase {
+    text-transform: uppercase;
+}
+
+// Make text center-aligned
+/// @example html
+///  <div class="center">I am centered.</div>
+///
+/// @group browser
+.center {
+    text-align: center;
+}
+
+// Hide element on all screens
+/// @example html
+///  <div class="hidden">I am hidden.</div>
+///
+/// @group browser
+.hidden {
+    display: none;
+}
+
+/// Hide element on all screens larger than tablet.
+/// @example html
+///  <div class="hidden-desktop"></div>
+///
+/// @group browser
+.hidden-desktop {
+    @include mq($from: tablet) {
+        display: none;
+    }
+}
+
+// Hide element on all screens larger than portait-layout tablet.
+/// @example html
+///  <div class="hidden-tablet-plus"></div>
+///
+/// @group browser
+.hidden-tablet-plus {
+    @include mq($from: tabletPortrait) {
+        display: none;
+    }
+}
+
+// Hide element on all phone screens.
+/// @example html
+///  <div class="hidden-mobile"></div>
+///
+/// @group browser
+.hidden-mobile {
+    @include mobile-only {
+        display: none;
+    }
+}
+
+// Hide element on all non-phone screens.
+/// @example html
+///  <div class="hidden-not-mobile"></div>
+///
+/// @group browser
+.hidden-not-mobile {
+    @include mq($from: mobileLg) {
+        display: none;
+    }
+}
