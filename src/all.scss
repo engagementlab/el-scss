@@ -6,11 +6,15 @@
  * ==========
  */
 
-//  You must specify these vars before importing this package:
+/// You must specify this var before using the cdn-image function
+/// @group visual
 $cloudinary-account: 'cloudinary' !default;
+/// You must specify this var before using the cdn-image function
+/// @group visual
 $cdn-product: 'homepage' !default;
 
 @import 'src/_animation';
+@import 'src/_browser';
 @import 'src/_breakpoint';
 @import 'src/_placeholder';
 @import 'src/_pxem';
@@ -19,16 +23,15 @@ $cdn-product: 'homepage' !default;
 // This will be in node_modules root
 @import '../../sass-mq/mq';
 
-
-/// Apply style content to angular shadow-pierced image
+/// Apply style content to AngularJS shadow-pierced image
 /// @example scss
-///     @include ngImg {
+///     @include ng-img {
 ///         margin-top: 1%;
 ///     }
 ///
 /// @link https://angular.io/guide/component-styles
 /// @group general
-@mixin ngImg {
+@mixin ng-img {
     ::ng-deep img {
         @content;
     }
@@ -47,7 +50,7 @@ $cdn-product: 'homepage' !default;
 ///
 /// @param {string} $type - type of filter
 /// @param {percentage|decimal} $amount - filter amount
-/// @group general
+/// @group visual
 @mixin filter($type, $amount) {
     -webkit-filter: $type+unquote('(#{$amount})');
     -moz-filter: $type+unquote('(#{$amount})');
@@ -65,7 +68,7 @@ $cdn-product: 'homepage' !default;
 /// @param {length} $blur - blur size
 /// @param {color} $color - shadow color
 /// @param {boolean} $inset [false] - if true, shadow is inside element frame
-/// @group general
+/// @group visual
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
     @if $inset {
         -webkit-box-shadow: inset $top $left $blur $color;
@@ -88,7 +91,7 @@ $cdn-product: 'homepage' !default;
 /// @param {length} $top-right [null] - top-right corner value
 /// @param {length} $bottom-right [null] - bottom-right corner value
 /// @param {length} $bottom-left [null] - bottom-left corner value
-/// @group general
+/// @group visual
 @mixin border-radius($top-left-radius, $top-right: null, $bottom-right: null, $bottom-left: null) {
 
     -webkit-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
@@ -103,7 +106,7 @@ $cdn-product: 'homepage' !default;
 ///     @include(circlular-background(#fff);
 ///
 /// @param {color} $color - color of circle
-/// @group general
+/// @group visual
 @mixin circular-background($color) {
 
     background: -moz-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
@@ -112,10 +115,14 @@ $cdn-product: 'homepage' !default;
 }
 
 /// Create inline URL to Cloudinary-hosted image with any specified transforms.
+/// @require {variable} $cloudinary-account - Cloudinary account name
+/// @require {variable} $cdn-product - Cloudinary folder (product) to use for image path
 /// @example scss
 ///     background-image: cdn-image('bg/home-bg', f_auto, c_scale, w_1280)
 ///
-/// @group general
+/// @param {string} $imgName - name of image, including path
+/// @param {string} $options - comma-seperated list of image options/transforms
+/// @group visual
 @function cdn-image($imgName, $options...) {
 
     $imgParams: ();
@@ -129,61 +136,20 @@ $cdn-product: 'homepage' !default;
     @return url("#{$strPrefix}/v#{$version}/#{$cdn-product}/#{$imgName}");
 }
 
-// Helper classes
-
-.small {
-    font-size: small;
-}
-
-.xx-large {
-    font-size: xx-large;
-}
-
-.uppercase {
-    text-transform: uppercase;
-}
-
-.center {
-    text-align: center;
-}
-
+// Remove element's margin.
+/// @example html
+///  <div class="no-margin">I have no margin.</div>
+///
+/// @group general
 .no-margin {
     margin: 0;
 }
 
+// Remove element's padding.
+/// @example html
+///  <div class="no-pad">I have no padding.</div>
+///
+/// @group general
 .no-pad {
     padding: 0;
-}
-
-.hidden {
-    display: none;
-}
-
-/// Hide element on all screens larger than tablet.
-/// @example html
-///  <div class="hidden-desktop"></div>
-///
-/// @group helpers
-.hidden-desktop {
-    @include mq($from: tablet) {
-        display: none;
-    }
-}
-
-.hidden-tablet-plus {
-    @include mq($from: tabletPortrait) {
-        display: none;
-    }
-}
-
-.hidden-mobile {
-    @include mobile-only {
-        display: none;
-    }
-}
-
-.hidden-not-mobile {
-    @include mq($from: mobileLg) {
-        display: none;
-    }
 }

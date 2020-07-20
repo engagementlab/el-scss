@@ -1,0 +1,15 @@
+{
+    "dest": "./docs",
+    "exclude": [
+        "node_modules/sass-mq/*"
+    ],
+    "groups": {
+        "animation": "Animation",
+        "general": "General",
+        "browser": "Browser & Font",
+        "helpers": "Helpers",
+        "transitions": "Transitions & Transforms",
+        "visual": "Visuals"
+    },
+    "verbose": true
+}
