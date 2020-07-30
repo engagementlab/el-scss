@@ -13,12 +13,12 @@ $cloudinary-account: 'cloudinary' !default;
 /// @group visual
 $cdn-product: 'homepage' !default;
 
-@import 'src/_animation';
-@import 'src/_browser';
-@import 'src/_breakpoint';
-@import 'src/_placeholder';
-@import 'src/_pxem';
-@import 'src/_transforms';
+@import '_animation';
+@import '_browser';
+@import '_breakpoint';
+@import '_placeholder';
+@import '_pxem';
+@import '_transforms';
 
 // This will be in node_modules root
 @import '../../sass-mq/mq';
