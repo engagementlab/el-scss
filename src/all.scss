@@ -13,15 +13,15 @@ $cloudinary-account: 'cloudinary' !default;
 /// @group visual
 $cdn-product: 'homepage' !default;
 
+// This will be in node_modules root
+@import '../node_modules/sass-mq/_mq';
+
 @import '_animation';
-@import '_browser';
 @import '_breakpoint';
+@import '_browser';
 @import '_placeholder';
 @import '_pxem';
 @import '_transforms';
-
-// This will be in node_modules root
-@import '../../sass-mq/mq';
 
 /// Apply style content to AngularJS shadow-pierced image
 /// @example scss
@@ -32,9 +32,9 @@ $cdn-product: 'homepage' !default;
 /// @link https://angular.io/guide/component-styles
 /// @group general
 @mixin ng-img {
-    ::ng-deep img {
-        @content;
-    }
+  ::ng-deep img {
+    @content;
+  }
 }
 
 /// Apply any type of filter to element.
@@ -52,11 +52,11 @@ $cdn-product: 'homepage' !default;
 /// @param {percentage|decimal} $amount - filter amount
 /// @group visual
 @mixin filter($type, $amount) {
-    -webkit-filter: $type+unquote('(#{$amount})');
-    -moz-filter: $type+unquote('(#{$amount})');
-    -ms-filter: $type+unquote('(#{$amount})');
-    -o-filter: $type+unquote('(#{$amount})');
-    filter: $type+unquote('(#{$amount})');
+  -webkit-filter: $type+unquote('(#{$amount})');
+  -moz-filter: $type+unquote('(#{$amount})');
+  -ms-filter: $type+unquote('(#{$amount})');
+  -o-filter: $type+unquote('(#{$amount})');
+  filter: $type+unquote('(#{$amount})');
 }
 
 /// Apply box shadow to element.
@@ -70,17 +70,17 @@ $cdn-product: 'homepage' !default;
 /// @param {boolean} $inset [false] - if true, shadow is inside element frame
 /// @group visual
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-    @if $inset {
-        -webkit-box-shadow: inset $top $left $blur $color;
-        -moz-box-shadow: inset $top $left $blur $color;
-        box-shadow: inset $top $left $blur $color;
-    }
+  @if $inset {
+    -webkit-box-shadow: inset $top $left $blur $color;
+    -moz-box-shadow: inset $top $left $blur $color;
+    box-shadow: inset $top $left $blur $color;
+  }
 
-    @else {
-        -webkit-box-shadow: $top $left $blur $color;
-        -moz-box-shadow: $top $left $blur $color;
-        box-shadow: $top $left $blur $color;
-    }
+  @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
 }
 
 /// Apply border radius to element.
@@ -94,10 +94,10 @@ $cdn-product: 'homepage' !default;
 /// @group visual
 @mixin border-radius($top-left-radius, $top-right: null, $bottom-right: null, $bottom-left: null) {
 
-    -webkit-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
-    -moz-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
-    -ms-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
-    border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+  -webkit-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+  -moz-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+  -ms-border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
+  border-radius: $top-left-radius $top-right $bottom-right $bottom-left;
 
 }
 
@@ -109,9 +109,9 @@ $cdn-product: 'homepage' !default;
 /// @group visual
 @mixin circular-background($color) {
 
-    background: -moz-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
-    background: -webkit-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
-    background: radial-gradient(ellipse at center, $color 1%, $color 70%, white 1%);
+  background: -moz-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
+  background: -webkit-radial-gradient(center, ellipse cover, $color 1%, $color 70%, white 1%);
+  background: radial-gradient(ellipse at center, $color 1%, $color 70%, white 1%);
 }
 
 /// Create inline URL to Cloudinary-hosted image with any specified transforms.
@@ -125,15 +125,15 @@ $cdn-product: 'homepage' !default;
 /// @group visual
 @function cdn-image($imgName, $options...) {
 
-    $imgParams: ();
-    $version: random(500000) + 10000000;
-    $strPrefix: "https://res.cloudinary.com/#{$cloudinary-account}/image/upload/";
+  $imgParams: ();
+  $version: random(500000) + 10000000;
+  $strPrefix: "https://res.cloudinary.com/#{$cloudinary-account}/image/upload/";
 
-    @each $value in $options {
-        $strPrefix: $strPrefix + ","+ $value;
-    }
+  @each $value in $options {
+    $strPrefix: $strPrefix + ","+ $value;
+  }
 
-    @return url("#{$strPrefix}/v#{$version}/#{$cdn-product}/#{$imgName}");
+  @return url("#{$strPrefix}/v#{$version}/#{$cdn-product}/#{$imgName}");
 }
 
 // Remove element's margin.
@@ -142,7 +142,7 @@ $cdn-product: 'homepage' !default;
 ///
 /// @group general
 .no-margin {
-    margin: 0;
+  margin: 0;
 }
 
 // Remove element's padding.
@@ -151,5 +151,5 @@ $cdn-product: 'homepage' !default;
 ///
 /// @group general
 .no-pad {
-    padding: 0;
+  padding: 0;
 }

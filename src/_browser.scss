@@ -14,7 +14,7 @@
 ///
 /// @group browser
 .small {
-    font-size: small;
+  font-size: small;
 }
 
 // Make font-size "large"
@@ -23,7 +23,7 @@
 ///
 /// @group browser
 .large {
-    font-size: large;
+  font-size: large;
 }
 
 // Make font-size "xx-large"
@@ -32,7 +32,7 @@
 ///
 /// @group browser
 .xx-large {
-    font-size: xx-large;
+  font-size: xx-large;
 }
 
 // Make text transformed as uppercase
@@ -41,7 +41,7 @@
 ///
 /// @group browser
 .uppercase {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 // Make text center-aligned
@@ -50,8 +50,10 @@
 ///
 /// @group browser
 .center {
-    text-align: center;
+  text-align: center;
 }
+
+// HIDE/SHOW
 
 // Hide element on all screens
 /// @example html
@@ -59,7 +61,7 @@
 ///
 /// @group browser
 .hidden {
-    display: none;
+  display: none;
 }
 
 /// Hide element on all screens larger than tablet.
@@ -68,9 +70,9 @@
 ///
 /// @group browser
 .hidden-desktop {
-    @include mq($from: tablet) {
-        display: none;
-    }
+  @include mq($from: tablet) {
+    display: none;
+  }
 }
 
 // Hide element on all screens larger than portait-layout tablet.
@@ -79,9 +81,9 @@
 ///
 /// @group browser
 .hidden-tablet-plus {
-    @include mq($from: tabletPortrait) {
-        display: none;
-    }
+  @include mq($from: tabletPortrait) {
+    display: none;
+  }
 }
 
 // Hide element on all phone screens.
@@ -90,9 +92,9 @@
 ///
 /// @group browser
 .hidden-mobile {
-    @include mobile-only {
-        display: none;
-    }
+  @include mobile-only {
+    display: none;
+  }
 }
 
 // Hide element on all non-phone screens.
@@ -101,7 +103,7 @@
 ///
 /// @group browser
 .hidden-not-mobile {
-    @include mq($from: mobileLg) {
-        display: none;
-    }
+  @include mq($from: mobileLg) {
+    display: none;
+  }
 }
