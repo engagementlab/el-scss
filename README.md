@@ -6,6 +6,6 @@
 
 ## Usage
 In your SCSS:
-```@import '~/el-scss/bundle';```
+```@import '~/el-scss/src/all';```
 
 Full documentation may be found [here](https://engagementlab.github.io/el-scss/).
