@@ -14,7 +14,7 @@ $cloudinary-account: 'cloudinary' !default;
 $cdn-product: 'homepage' !default;
 
 // This will be in node_modules root
-@import '../node_modules/sass-mq/_mq';
+@import '../../../sass-mq/_mq';
 
 @import '_animation';
 @import '_breakpoint';
